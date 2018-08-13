@@ -71,6 +71,16 @@
         private async void LoadProducts()
         {
             IsRefreshing = true;
+
+            //Aqui valido si hay conecction con  internet:
+            var connection = await apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                IsRefreshing = false;
+                await Application.Current.MainPage.DisplayAlert("Error.",connection.Message,"Accept.");
+                return;
+            }
+
             //var urlBase = Application.Current.Resources["ApiProduct"].ToString();
             var response = await apiService.GetList<Product>("https://salesapiservices.azurewebsites.net", "/api", "/Products");
             if (!response.IsSuccess)
