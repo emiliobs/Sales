@@ -2,6 +2,7 @@
 {
     using GalaSoft.MvvmLight.Command;
     using Sales.Common.Models;
+    using Sales.Helpers;
     using Sales.Services;
     using System;
     using System.Collections.Generic;
@@ -77,15 +78,18 @@
             if (!connection.IsSuccess)
             {
                 IsRefreshing = false;
-                await Application.Current.MainPage.DisplayAlert("Error.",connection.Message,"Accept.");
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, connection.Message, 
+                                                               Languages.Accept);
                 return;
             }
 
-            //var urlBase = Application.Current.Resources["ApiProduct"].ToString();
-            var response = await apiService.GetList<Product>("https://salesapiservices.azurewebsites.net", "/api", "/Products");
+            var url = Application.Current.Resources["UrlAPI"].ToString();
+            var response = await apiService.GetList<Product>(url, "/api", "/Products");
+            //var response = await apiService.GetList<Product>("https://salesapiservices.azurewebsites.net", 
+                                                               //"/api", "/Products");
             if (!response.IsSuccess)
             {
-                await Application.Current.MainPage.DisplayAlert("Error.",response.Message,"Accept.");
+                await Application.Current.MainPage.DisplayAlert(Languages.Error,response.Message, Languages.Accept);
                 IsRefreshing = false;
                 return;
             }
