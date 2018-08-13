@@ -8,6 +8,9 @@
         <ScrollView BindingContext="{Binding Products}">
         <StackLayout Padding="5">
                 <ListView
+                    IsRefreshing="{Binding IsRefreshing}"
+                    IsPullToRefreshEnabled="True"
+                    RefreshCommand="{Binding RefreshCommand}"
                     HasUnevenRows="True"
                     ItemsSource="{Binding ListProducts}">
                     <ListView.ItemTemplate>

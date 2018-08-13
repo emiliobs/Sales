@@ -1,10 +1,12 @@
 ﻿namespace Sales.ViewModels
 {
+    using GalaSoft.MvvmLight.Command;
     using Sales.Common.Models;
     using Sales.Services;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Windows.Input;
     using Xamarin.Forms;
 
     public class ProductsViewModel:BaseViewModel
@@ -15,9 +17,23 @@
 
         #region Atributtes                     
         ObservableCollection<Product> listProducts;
+        bool isRefreshing;
         #endregion
 
         #region Properties
+
+        public bool IsRefreshing
+        {
+            get => isRefreshing;
+            set
+            {
+                if (isRefreshing != value)
+                {
+                    isRefreshing = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public ObservableCollection<Product> ListProducts
         {
             get => listProducts;
@@ -30,7 +46,8 @@
                 }
             }
         }
-        #endregion
+
+       #endregion
 
         #region Contructs
         public ProductsViewModel()
@@ -40,20 +57,33 @@
         }
         #endregion
 
+        #region Commands
+        public ICommand RefreshCommand { get => new RelayCommand(Refresh); }
+
+        #endregion
+
         #region Mehtods
+
+        private void Refresh()
+        {
+            LoadProducts();
+        }
         private async void LoadProducts()
         {
+            IsRefreshing = true;
             //var urlBase = Application.Current.Resources["ApiProduct"].ToString();
             var response = await apiService.GetList<Product>("https://salesapiservices.azurewebsites.net", "/api", "/Products");
             if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert("Error.",response.Message,"Accept.");
+                IsRefreshing = false;
                 return;
             }
 
             var listProduct = (List<Product>)response.Result;
             //aqui armos las observablecollection a aprtir de una genericcollection(list)
             ListProducts = new ObservableCollection<Product>(listProduct);
+            IsRefreshing = false;
         }
         #endregion
     }
