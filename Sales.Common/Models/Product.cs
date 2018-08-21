@@ -6,7 +6,7 @@
     public class Product
     {
         [Key]
-        public int ProductId { get; set; }  
+        public int ProductId { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -15,10 +15,10 @@
         [DataType(DataType.MultilineText)]
         public string Remarks { get; set; }
 
-        [Display(Name ="Iamge")]
+        [Display(Name = "Image")]
         public string ImagePath { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode =false)]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal Price { get; set; }
 
         [Display(Name = "Is Available")]
@@ -28,11 +28,18 @@
         [DataType(DataType.Date)]
         public DateTime PublishOn { get; set; }
 
-        //public override string ToString()
-        //{
-        //    return $"{Description}";
-        //}
+        public string ImageFullPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ImagePath))
+                {
+                    return $"noproduct";
+                }
 
+                return $"https://salesbackend.azurewebsites.net/{ImagePath.Substring(1)}";
+            }
 
+        }
     }
 }

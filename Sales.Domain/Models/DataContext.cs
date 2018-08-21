@@ -8,8 +8,11 @@
         {
 
         }
+
         #endregion
 
-        public System.Data.Entity.DbSet<Sales.Common.Models.Product> Products { get; set; }
+        #region Properties
+        public DbSet<Common.Models.Product> Products { get; set; } 
+        #endregion
     }
 }

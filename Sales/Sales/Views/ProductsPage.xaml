@@ -19,18 +19,27 @@
                             <ViewCell>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
                                         <ColumnDefinition Width="2*"></ColumnDefinition>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <Label 
+                                    <Image
+                                         HeightRequest="80"
                                         Grid.Column="0"
+                                        WidthRequest="80"
+                                        Source="{Binding ImageFullPath}">                                        
+                                    </Image>
+                                    <Label 
+                                        Grid.Column="1"
                                         Text="{Binding Description}"
-                                        FontAttributes="Bold">                                        
+                                        FontAttributes="Bold"
+                                        VerticalOptions="Center">                                        
                                     </Label>
                                     <Label
-                                        Grid.Column="1"
+                                        Grid.Column="2"
                                         Text="{Binding Price, StringFormat='{0:C2}'}"
-                                        HorizontalOptions="End">                                        
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Center">                                        
                                     </Label>
                                 </Grid>
                             </ViewCell>
