@@ -5,9 +5,18 @@
              x:Class="Sales.Views.ProductsPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="{i18n:Translate Products}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Icon="ic_action_add_circle" 
+            Text="{i18n:Translate AddProductsToolBar}"
+            Command="{Binding AddProductCommand}">            
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
-        <ScrollView BindingContext="{Binding Products}">
-        <StackLayout Padding="5">
+        
+            <StackLayout BindingContext="{Binding Products}" Padding="5">
                 <ListView
                     IsRefreshing="{Binding IsRefreshing}"
                     IsPullToRefreshEnabled="True"
@@ -29,12 +38,15 @@
                                         WidthRequest="80"
                                         Source="{Binding ImageFullPath}">                                        
                                     </Image>
-                                    <Label 
-                                        Grid.Column="1"
+                                    <StackLayout Grid.Column="1" VerticalOptions="Center">
+                                        <Label 
                                         Text="{Binding Description}"
-                                        FontAttributes="Bold"
-                                        VerticalOptions="Center">                                        
-                                    </Label>
+                                        FontAttributes="Bold">
+                                        </Label>
+                                        <Label
+                                            Text="{Binding Remarks}">                                            
+                                        </Label>
+                                    </StackLayout>
                                     <Label
                                         Grid.Column="2"
                                         Text="{Binding Price, StringFormat='{0:C2}'}"
@@ -47,6 +59,6 @@
                     </ListView.ItemTemplate>
                 </ListView>
         </StackLayout>
-        </ScrollView>
+        
     </ContentPage.Content>
 </ContentPage>

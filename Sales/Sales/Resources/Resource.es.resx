@@ -120,6 +120,18 @@
   <data name="Accept" xml:space="preserve">
     <value>Aceptar</value>
   </data>
+  <data name="AddProducts" xml:space="preserve">
+    <value>Agregar Nuevo Producto</value>
+  </data>
+  <data name="AddProductsToolBar" xml:space="preserve">
+    <value>Agregar Nuevo Producto</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="DescriptionPlaceHolder" xml:space="preserve">
+    <value>Ingrese una descripción del Producto.....</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -129,7 +141,19 @@
   <data name="NoInternet" xml:space="preserve">
     <value>No tiene acceso a internet</value>
   </data>
+  <data name="Price" xml:space="preserve">
+    <value>Precio</value>
+  </data>
+  <data name="PricePlaceHolder" xml:space="preserve">
+    <value>Ingrese el precio del producto.....</value>
+  </data>
   <data name="Products" xml:space="preserve">
     <value>Productos</value>
+  </data>
+  <data name="Remarks" xml:space="preserve">
+    <value>Observaciones</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Salvar.</value>
   </data>
 </root>
