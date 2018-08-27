@@ -14,6 +14,7 @@
         }
 
         public static string Accept { get => Resource.Accept; }
+        public static string ChangeImage { get => Resource.ChangeImage; }
         public static string Error { get=> Resource.Error; }
         public static string InternetSetting { get=> Resource.InternetSetting; }
         public static string NoInternet { get=>Resource.NoInternet; }
