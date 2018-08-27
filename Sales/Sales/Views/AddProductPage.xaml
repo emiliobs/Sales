@@ -39,7 +39,8 @@
                     <Entry 
                           Grid.Column="1"
                         Grid.Row="0"
-                        Placeholder="{i18n:Translate DescriptionPlaceHolder}">
+                        Placeholder="{i18n:Translate DescriptionPlaceHolder}"
+                        Text="{Binding Description}">
                     </Entry>
                     <Label
                         VerticalOptions="Center"
@@ -51,7 +52,8 @@
                           Grid.Column="1"
                         Grid.Row="1"
                 Placeholder="{i18n:Translate PricePlaceHolder}"
-                Keyboard="Numeric">
+                Keyboard="Numeric"
+                        Text="{Binding Price}">
                     </Entry>
                     <Label 
                           Grid.Column="0"
@@ -61,16 +63,19 @@
                     <Editor
                           Grid.Column="1"
                         Grid.Row="2"
-                        
+                         Text="{Binding Remarks }"
                         VerticalOptions="FillAndExpand">                         
                     </Editor>
 
                 </Grid>            
-            <ActivityIndicator 
+            <ActivityIndicator
+                IsRunning="{Binding IsRunning}"
                 VerticalOptions="FillAndExpand">                
             </ActivityIndicator>
             <Button
                 BackgroundColor="Magenta"
+                Command="{Binding SaveCommand}"
+                IsEnabled="{Binding IsEnabled}"
                 CornerRadius="23"
                 Text="{i18n:Translate Save}"
                 HeightRequest="46">                

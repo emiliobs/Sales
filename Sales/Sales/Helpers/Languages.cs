@@ -13,6 +13,8 @@
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
 
+        public static string DescriptionError { get => Resource.DescriptionError; }
+        public static string PriceError { get => Resource.PriceError; }
         public static string Accept { get => Resource.Accept; }
         public static string ChangeImage { get => Resource.ChangeImage; }
         public static string Error { get=> Resource.Error; }
