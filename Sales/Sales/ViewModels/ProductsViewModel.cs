@@ -42,7 +42,7 @@
             {
                 if (listProducts != value)
                 {
-                    listProducts = value;
+                    listProducts = value;                    
                     OnPropertyChanged();
                 }
             }
@@ -53,9 +53,31 @@
         #region Contructs
         public ProductsViewModel()
         {
+            //singleton
+            instance = this;
+
+            //service
             apiService = new ApiServices();
+
+            //Methods
             LoadProducts();
         }
+        #endregion
+
+        #region Singlenton
+
+        private static ProductsViewModel instance;
+
+        public static ProductsViewModel GetInstance ()
+        {
+            if (instance == null)
+            {
+                return  new ProductsViewModel();
+            }
+
+            return instance;
+        }
+
         #endregion
 
         #region Commands
