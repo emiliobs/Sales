@@ -219,7 +219,17 @@
             var newProduct = (Product)response.Result;
             //patron sigleton
             var productViewModel = ProductsViewModel.GetInstance();
-            productViewModel.ListProducts.Add(newProduct);
+            productViewModel.ListProducts.Add(new ProductItemViewModel
+            {
+                Description = newProduct.Description,
+                ImagePath = newProduct.ImagePath,
+                ImageArray = newProduct.ImageArray,
+                IsAvailable = newProduct.IsAvailable,
+                Price = newProduct.Price,
+                ProductId = newProduct.ProductId,
+                PublishOn = newProduct.PublishOn,
+                Remarks = newProduct.Remarks,
+            });
            
             IsRunning = false;
             IsEnabled = true;

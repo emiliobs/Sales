@@ -352,7 +352,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57100</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:57100/</IISUrl>
+          <IISUrl>http://localhost:57100</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

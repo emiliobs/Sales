@@ -7,6 +7,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Windows.Input;
     using Xamarin.Forms;
 
@@ -17,7 +18,7 @@
         #endregion
 
         #region Atributtes                     
-        ObservableCollection<Product> listProducts;
+        ObservableCollection<ProductItemViewModel> listProducts;
         bool isRefreshing;
         #endregion
 
@@ -35,7 +36,7 @@
                 }
             }
         }
-        public ObservableCollection<Product> ListProducts
+        public ObservableCollection<ProductItemViewModel> ListProducts
         {
             get => listProducts;
             set
@@ -100,7 +101,8 @@
             if (!connection.IsSuccess)
             {
                 IsRefreshing = false;
-                await Application.Current.MainPage.DisplayAlert(Languages.Error, connection.Message, 
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, 
+                                                               connection.Message, 
                                                                Languages.Accept);
                 return;
             }
@@ -119,8 +121,36 @@
             }
 
             var listProduct = (List<Product>)response.Result;
+
+            //Mejor opcion con landa y linq:
+            var myList = listProduct.Select(p=> new ProductItemViewModel
+            {
+                Description = p.Description,
+                ImagePath = p.ImagePath,
+                ImageArray = p.ImageArray,
+                IsAvailable = p.IsAvailable,
+                Price = p.Price,
+                ProductId = p.ProductId,
+                PublishOn = p.PublishOn,
+                Remarks = p.Remarks,
+                
+
+            });
+
+            //NO esto funciona, pero el lo que no se puede hacer porque es 
+            //ineficiente cuando hay 200 o mas registro en la bd:
+            //var myList = new List<ProductItemViewModel>();
+            //foreach (var item in listProduct)
+            //{
+            //    myList.Add(new ProductItemViewModel {
+                   
+                    
+
+            //    });
+           // }
+
             //aqui armos las observablecollection a aprtir de una genericcollection(list)
-            ListProducts = new ObservableCollection<Product>(listProduct);
+            ListProducts = new ObservableCollection<ProductItemViewModel>(myList);
             IsRefreshing = false;
         }
         #endregion

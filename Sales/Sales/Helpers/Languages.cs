@@ -13,6 +13,12 @@
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
 
+        public static string Confirm { get => Resource.Confirm; }
+        public static string Delete { get => Resource.Delete; }
+        public static string DeleteConfirmation { get => Resource.DeleteConfirmation; }
+        public static string Yes { get => Resource.Yes; }
+        public static string No { get => Resource.No; }
+        public static string Edit { get => Resource.Edit; }
         public static string Cancel { get => Resource.Cancel; }
         public static string NewPicture { get => Resource.NewPicture; }
         public static string FromGallery { get => Resource.FromGallery; }
