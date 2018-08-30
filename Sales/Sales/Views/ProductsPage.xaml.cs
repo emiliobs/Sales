@@ -15,6 +15,8 @@ namespace Sales.Views
 		public ProductsPage ()
 		{
 			InitializeComponent ();
+
+         
 		}
 	}
 }

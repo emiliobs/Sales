@@ -1,6 +1,8 @@
 ﻿namespace Sales.ViewModels
 {
     using GalaSoft.MvvmLight.Command;
+    using Plugin.Media;
+    using Plugin.Media.Abstractions;
     using Sales.Common.Models;
     using Sales.Helpers;
     using Sales.Services;
@@ -20,8 +22,11 @@
         #endregion
 
         #region Atributtes
+        //aqui queda almacenada la foto con el plugin de media:
+        private MediaFile file;
         private bool isRunning;
         private bool isEnabled;
+        private ImageSource imageSource;
 
         #endregion
 
@@ -53,6 +58,18 @@
             }
 
         }
+        public ImageSource ImageSource
+        {
+            get => imageSource;
+            set
+            {
+                if (imageSource != value)
+                {
+                    imageSource = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         #endregion
 
         #region Constructor
@@ -61,16 +78,63 @@
             ApiServices = new ApiServices();
 
             IsEnabled = true;
+            ImageSource = "noproduct";
           
         }
         #endregion
 
         #region Commands
+        public ICommand ChangeImageCommand { get => new RelayCommand(ChangeImage); }
+
         public ICommand SaveCommand { get => new RelayCommand(Save); }
 
         #endregion
 
         #region Methods
+
+        private async void ChangeImage()
+        {
+            await CrossMedia.Current.Initialize();
+            var souce = await Application.Current.MainPage.DisplayActionSheet(
+                 Languages.ImageSource,
+                 Languages.Cancel,null,
+                 Languages.FromGallery,
+                 Languages.NewPicture 
+                );
+
+            if (souce == Languages.Cancel)
+            {
+                file = null;
+                return;
+            }
+
+            if (souce == Languages.NewPicture)
+            {
+                file = await CrossMedia.Current.TakePhotoAsync(
+                    
+                    new StoreCameraMediaOptions
+                    {
+                       Directory = "Sample",
+                       Name = "test,jpg",
+                       PhotoSize = PhotoSize.Small,
+                    }
+                    
+                    );
+            }
+            else
+            {
+                file = await CrossMedia.Current.PickPhotoAsync();
+            }
+
+            if (file != null)
+            {
+                ImageSource = ImageSource.FromStream(()=> 
+                {
+                    var stream = file.GetStream();
+                    return stream;
+                });
+            }
+        }
 
         private async void Save()
         {
