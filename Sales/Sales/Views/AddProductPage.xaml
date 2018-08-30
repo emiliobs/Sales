@@ -9,8 +9,8 @@
         <ScrollView BindingContext="{Binding AddProduct}">               
         <StackLayout  Padding="10">
                 <Image
-                    HeightRequest="200"
-                    WidthRequest="200"
+                    
+                    WidthRequest="210"
                     Source="{Binding ImageSource}">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ChangeImageCommand}"></TapGestureRecognizer>

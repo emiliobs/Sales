@@ -180,12 +180,21 @@
                 return;
             }
 
+            //aqui todo para guardar la foto:
+            byte[] imageArray = null;
+            if (file != null)
+            {
+                //aqui convierto un arreglo de string a byte:
+                imageArray = FileHelper.ReadFully(file.GetStream());
+            }
+
             //aqui armo el objeto con las variables desde el formulario add new product:
             var product = new Product
             {
                Description = Description,
                Price       = price,
                Remarks     = Remarks,
+               ImageArray = imageArray,
             };
 
             var url = Application.Current.Resources["UrlAPI"].ToString();

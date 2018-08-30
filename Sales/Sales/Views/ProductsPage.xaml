@@ -33,9 +33,9 @@
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Image
-                                         HeightRequest="80"
+                                       WidthRequest="80"   
+                                        HeightRequest="80"
                                         Grid.Column="0"
-                                        WidthRequest="80"
                                         Source="{Binding ImageFullPath}">                                        
                                     </Image>
                                     <StackLayout Grid.Column="1" VerticalOptions="Center">
