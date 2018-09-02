@@ -4,6 +4,7 @@
     using Sales.Common.Models;
     using Sales.Helpers;
     using Sales.Services;
+    using Sales.Views;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -25,6 +26,15 @@
         #endregion
 
         #region Commands
+
+        public ICommand EditProductCommand { get => new RelayCommand(EditProduct); }
+
+        private async void EditProduct()
+        {
+            MainViewModel.GetInstance().EditProduct = new EditProductViewModel(this);
+            await Application.Current.MainPage.Navigation.PushAsync(new EditProductView());
+        }
+
         public ICommand DeleteProductCommand { get => new RelayCommand(DeleteProduct); }
         #endregion
 

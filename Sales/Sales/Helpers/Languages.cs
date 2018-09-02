@@ -13,6 +13,8 @@
             DependencyService.Get<ILocalize>().SetLocale(ci);
         }
 
+        public static string EditProducts { get => Resource.EditProducts; }
+        public static string IsAvailable { get => Resource.IsAvailable; }
         public static string Confirm { get => Resource.Confirm; }
         public static string Delete { get => Resource.Delete; }
         public static string DeleteConfirmation { get => Resource.DeleteConfirmation; }

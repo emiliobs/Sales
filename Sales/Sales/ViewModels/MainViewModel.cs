@@ -14,6 +14,7 @@
 
         public ProductsViewModel Products { get; set; }
         public AddProductViewModel AddProduct { get; set; }
+        public EditProductViewModel EditProduct { get; set; }
 
         #endregion
 
@@ -21,7 +22,24 @@
 
         public MainViewModel()
         {
+            instance = this;
             Products = new ProductsViewModel();
+        }
+
+        #endregion
+
+          #region Singlenton
+
+        private static MainViewModel instance;
+
+        public static MainViewModel GetInstance()
+        {
+            if (instance == null)
+            {
+                return new MainViewModel();
+            }
+
+            return instance;
         }
 
         #endregion
