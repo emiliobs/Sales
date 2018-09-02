@@ -9,7 +9,7 @@
         <ScrollView BindingContext="{Binding AddProduct}">               
         <StackLayout  Padding="10">
                 <Image
-                    
+                    Aspect="AspectFit"
                     WidthRequest="210"
                     Source="{Binding ImageSource}">
                     <Image.GestureRecognizers>

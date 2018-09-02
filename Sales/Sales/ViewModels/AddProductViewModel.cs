@@ -219,17 +219,9 @@
             var newProduct = (Product)response.Result;
             //patron sigleton
             var productViewModel = ProductsViewModel.GetInstance();
-            productViewModel.ListProducts.Add(new ProductItemViewModel
-            {
-                Description = newProduct.Description,
-                ImagePath = newProduct.ImagePath,
-                ImageArray = newProduct.ImageArray,
-                IsAvailable = newProduct.IsAvailable,
-                Price = newProduct.Price,
-                ProductId = newProduct.ProductId,
-                PublishOn = newProduct.PublishOn,
-                Remarks = newProduct.Remarks,
-            });
+            //aqui utlilizo el singleton para utilizar la propiedad de tippo lista MyProducts:
+            productViewModel.MyProducts.Add(newProduct);
+            productViewModel.RefreshList();
            
             IsRunning = false;
             IsEnabled = true;

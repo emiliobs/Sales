@@ -11,7 +11,7 @@
     using System.Windows.Input;
     using Xamarin.Forms;
 
-    public class ProductsViewModel:BaseViewModel
+    public class ProductsViewModel : BaseViewModel
     {
         #region Services
         ApiServices apiService;
@@ -23,6 +23,7 @@
         #endregion
 
         #region Properties
+        public List<Product> MyProducts { get; set; }
 
         public bool IsRefreshing
         {
@@ -43,13 +44,13 @@
             {
                 if (listProducts != value)
                 {
-                    listProducts = value;                    
+                    listProducts = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-       #endregion
+        #endregion
 
         #region Contructs
         public ProductsViewModel()
@@ -69,11 +70,11 @@
 
         private static ProductsViewModel instance;
 
-        public static ProductsViewModel GetInstance ()
+        public static ProductsViewModel GetInstance()
         {
             if (instance == null)
             {
-                return  new ProductsViewModel();
+                return new ProductsViewModel();
             }
 
             return instance;
@@ -101,8 +102,8 @@
             if (!connection.IsSuccess)
             {
                 IsRefreshing = false;
-                await Application.Current.MainPage.DisplayAlert(Languages.Error, 
-                                                               connection.Message, 
+                await Application.Current.MainPage.DisplayAlert(Languages.Error,
+                                                               connection.Message,
                                                                Languages.Accept);
                 return;
             }
@@ -110,20 +111,39 @@
             var url = Application.Current.Resources["UrlAPI"].ToString();
             var urlPrefix = Application.Current.Resources["UrlPrefix"].ToString();
             var controller = Application.Current.Resources["UrlProductsController"].ToString();
-           var response = await apiService.GetList<Product>(url, urlPrefix, controller);
-           // var response = await apiService.GetList<Product>($"https://salesapiservices.azurewebsites.net", 
-                                                               //"/api", "/Products");
+            var response = await apiService.GetList<Product>(url, urlPrefix, controller);
+            // var response = await apiService.GetList<Product>($"https://salesapiservices.azurewebsites.net", 
+            //"/api", "/Products");
             if (!response.IsSuccess)
             {
-                await Application.Current.MainPage.DisplayAlert(Languages.Error,response.Message, Languages.Accept);
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 IsRefreshing = false;
                 return;
             }
 
-            var listProduct = (List<Product>)response.Result;
+            MyProducts = (List<Product>)response.Result;
+
+            //Aqui un método para refrezcar la lista:
+            this.RefreshList();     
+
+        }
+
+        public void RefreshList()
+        {
+            //NO esto funciona, pero el lo que no se puede hacer porque es 
+            //ineficiente cuando hay 200 o mas registro en la bd:
+            //var myList = new List<ProductItemViewModel>();
+            //foreach (var item in listProduct)
+            //{
+            //    myList.Add(new ProductItemViewModel {
+
+
+
+            //    });
+            // }
 
             //Mejor opcion con landa y linq:
-            var myList = listProduct.Select(p=> new ProductItemViewModel
+            var myListProductItemViewModel = MyProducts.Select(p => new ProductItemViewModel
             {
                 Description = p.Description,
                 ImagePath = p.ImagePath,
@@ -133,24 +153,13 @@
                 ProductId = p.ProductId,
                 PublishOn = p.PublishOn,
                 Remarks = p.Remarks,
-                
+
 
             });
 
-            //NO esto funciona, pero el lo que no se puede hacer porque es 
-            //ineficiente cuando hay 200 o mas registro en la bd:
-            //var myList = new List<ProductItemViewModel>();
-            //foreach (var item in listProduct)
-            //{
-            //    myList.Add(new ProductItemViewModel {
-                   
-                    
-
-            //    });
-           // }
 
             //aqui armos las observablecollection a aprtir de una genericcollection(list)
-            ListProducts = new ObservableCollection<ProductItemViewModel>(myList);
+            ListProducts = new ObservableCollection<ProductItemViewModel>(myListProductItemViewModel.OrderBy(p => p.Description));
             IsRefreshing = false;
         }
         #endregion
