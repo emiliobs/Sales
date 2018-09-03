@@ -39,10 +39,14 @@
                                 </MenuItem>
                             </ViewCell.ContextActions>
                                 <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding  EditProductCommand}"></TapGestureRecognizer>
+                                </Grid.GestureRecognizers>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                                         <ColumnDefinition Width="2*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Image
                                        WidthRequest="80"   
@@ -65,6 +69,12 @@
                                         HorizontalOptions="End"
                                         VerticalOptions="Center">                                        
                                     </Label>
+                                <Image
+                                    Aspect="Fill"
+                                    BackgroundColor="AliceBlue"
+                                    Grid.Column="3"
+                                    Source="ic_action_chevron_right"
+                                    VerticalOptions="Center"></Image>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>

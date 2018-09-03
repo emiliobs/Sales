@@ -12,6 +12,7 @@
     using System.Text;
     using System.Windows.Input;
     using Xamarin.Forms;
+   
 
     public class EditProductViewModel: BaseViewModel
     {
@@ -103,14 +104,77 @@
         #endregion
 
         #region Commands
-        public ICommand ChangeImageCommand { get => new RelayCommand(ChangeImage); }
-
+        public ICommand DeleteCommand { get => new RelayCommand(Delete); }
+        public ICommand ChangeImageCommand { get => new RelayCommand(ChangeImage); }   
         public ICommand SaveCommand { get => new RelayCommand(Save); }
 
         #endregion
 
         #region Methods
 
+        private async void Delete()
+        {
+            var answer = await Application.Current.MainPage.DisplayAlert(
+                      Languages.Confirm,
+                      Languages.DeleteConfirmation,
+                      Languages.Yes,
+                      Languages.No
+                      );
+
+            if (!answer)
+            {
+                return;
+            }
+
+            IsRunning = true;
+            IsEnabled = false;
+
+            //Aqui valido si hay conecction con  internet:
+            var connection = await ApiServices.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+
+                await Application.Current.MainPage.DisplayAlert(Languages.Error,
+                                                                connection.Message,
+                                                                Languages.Accept);
+
+                IsRunning = false;
+                IsEnabled = true;
+                return;
+            }
+
+            var url = Application.Current.Resources["UrlAPI"].ToString();
+            var urlPrefix = Application.Current.Resources["UrlPrefix"].ToString();
+            var controller = Application.Current.Resources["UrlProductsController"].ToString();
+            var response = await ApiServices.Delete(url, urlPrefix, controller, product.ProductId);
+            // var response = await apiService.GetList<Product>($"https://salesapiservices.azurewebsites.net", 
+            //"/api", "/Products");
+            if (!response.IsSuccess)
+            {
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
+
+                return;
+            }
+
+
+            //aui ya borro el registro en el service, y lluego tengo que refrescar la lista:
+            var productsViewModel = ProductsViewModel.GetInstance();
+            var deleteProduct = productsViewModel.MyProducts.Where(p => p.ProductId.Equals(product.ProductId)).FirstOrDefault();
+
+            if (deleteProduct != null)
+            {
+                productsViewModel.MyProducts.Remove(deleteProduct);
+            }
+
+            //aqui refresco:
+            productsViewModel.RefreshList();
+
+            IsRunning = false;
+            IsEnabled = true;
+            //aqui cuando ya elimine hago un back:
+            await Application.Current.MainPage.Navigation.PopAsync();
+
+        }
         private async void ChangeImage()
         {
             await CrossMedia.Current.Initialize();

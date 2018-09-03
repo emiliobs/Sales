@@ -80,12 +80,15 @@
 
             //aui ya borro el registro en el service, y lluego tengo que refrescar la lista:
             var productsViewModel = ProductsViewModel.GetInstance();
-            var deleteProduct = productsViewModel.ListProducts.Where(p => p.ProductId.Equals(ProductId)).FirstOrDefault();
+            var deleteProduct = productsViewModel.MyProducts.Where(p => p.ProductId.Equals(ProductId)).FirstOrDefault();
 
             if (deleteProduct != null)
             {
-                productsViewModel.ListProducts.Remove(deleteProduct);
+                productsViewModel.MyProducts.Remove(deleteProduct);
             }
+
+            //aqui refresco:
+            productsViewModel.RefreshList();
 
         }
         #endregion
