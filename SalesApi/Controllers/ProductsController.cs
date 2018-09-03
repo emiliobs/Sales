@@ -53,7 +53,25 @@ namespace SalesApi.Controllers
                 return BadRequest();
             }
 
-            db.Entry(product).State = EntityState.Modified;
+            if (product.ImageArray != null && product.ImageArray.Length > 0)
+            {
+                //aqui tomo imageaaray y lo tranformo en string:
+                var stream = new MemoryStream(product.ImageArray);
+                var guid = Guid.NewGuid().ToString();
+                var file = $"{guid}.jpg";
+                //var file = string.Format("{0}.jpg", guid);
+                var folder = "~/Content/Product";
+                var fullPath = $"{folder}/{file}";
+                // var fullPath = string.Format("{0}/{1}", folder, file);
+                var response = FilesHelper.UploadPhoto(stream, folder, file);
+
+                if (response)
+                {
+                    product.ImagePath = fullPath;
+                }
+            }
+
+                db.Entry(product).State = EntityState.Modified;
 
             try
             {
@@ -71,7 +89,7 @@ namespace SalesApi.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+                return Ok(product);
         }
 
         // POST: api/Products
