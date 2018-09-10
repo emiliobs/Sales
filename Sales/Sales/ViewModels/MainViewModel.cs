@@ -15,6 +15,7 @@
         public ProductsViewModel Products { get; set; }
         public AddProductViewModel AddProduct { get; set; }
         public EditProductViewModel EditProduct { get; set; }
+        public LoginViewModel Login { get; set; }
 
         #endregion
 
@@ -23,7 +24,7 @@
         public MainViewModel()
         {
             instance = this;
-            Products = new ProductsViewModel();
+            //Products = new ProductsViewModel();
         }
 
         #endregion

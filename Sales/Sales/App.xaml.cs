@@ -1,3 +1,4 @@
+using Sales.ViewModels;
 using Sales.Views;
 using System;
 using Xamarin.Forms;
@@ -13,7 +14,9 @@ namespace Sales
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage (new ProductsPage());
+            //MainPage = new NavigationPage (new ProductsPage());
+            MainViewModel.GetInstance().Login = new LoginViewModel();
+            MainPage = new NavigationPage (new LoginView());
         }
 
         #endregion
