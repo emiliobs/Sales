@@ -17,6 +17,14 @@
     <ContentPage.Content>
         
             <StackLayout BindingContext="{Binding Products}" Padding="5">
+
+            <SearchBar
+                HeightRequest="30"
+                Placeholder="{i18n:Translate Search}"
+                SearchCommand="{Binding SearchCommand}"
+                Text="{Binding Filter}">                
+            </SearchBar>
+                
                 <ListView
                     IsRefreshing="{Binding IsRefreshing}"
                     IsPullToRefreshEnabled="True"
@@ -65,7 +73,7 @@
                                     </StackLayout>
                                     <Label
                                         Grid.Column="2"
-                                        Text="{Binding Price, StringFormat='{0:C2}'}"
+                                        Text="{Binding Price}"
                                         HorizontalOptions="End"
                                         VerticalOptions="Center">                                        
                                     </Label>

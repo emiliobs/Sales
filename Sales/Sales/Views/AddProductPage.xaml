@@ -42,7 +42,7 @@
                     <Entry 
                           Grid.Column="1"
                         Grid.Row="0"
-                        Placeholder="{i18n:Translate DescriptionPlaceHolder}"
+                        Placeholder="{i18n:Translate DescriptionPlaceholder}"
                         Text="{Binding Description}">
                     </Entry>
                     <Label
@@ -54,7 +54,7 @@
                     <Entry
                           Grid.Column="1"
                         Grid.Row="1"
-                Placeholder="{i18n:Translate PricePlaceHolder}"
+                Placeholder="Enter the product description..."
                 Keyboard="Numeric"
                         Text="{Binding Price}">
                     </Entry>

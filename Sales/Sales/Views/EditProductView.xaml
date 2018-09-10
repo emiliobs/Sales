@@ -42,7 +42,7 @@
                     <Entry 
                           Grid.Column="1"
                         Grid.Row="0"
-                        Placeholder="{i18n:Translate DescriptionPlaceHolder}"
+                        Placeholder="Enter the product description..."
                         Text="{Binding Product.Description}">
                     </Entry>
                     <Label

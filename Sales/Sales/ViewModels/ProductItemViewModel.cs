@@ -42,7 +42,7 @@
         private async void DeleteProduct()
         {
             var answer = await Application.Current.MainPage.DisplayAlert(
-                         Languages.Confirm, 
+                        Languages.Confirm,
                          Languages.DeleteConfirmation, 
                          Languages.Yes, 
                          Languages.No

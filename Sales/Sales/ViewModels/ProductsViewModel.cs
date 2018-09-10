@@ -17,12 +17,26 @@
         ApiServices apiService;
         #endregion
 
-        #region Atributtes                     
+        #region Atributtes  
+        private string filter;
         ObservableCollection<ProductItemViewModel> listProducts;
         bool isRefreshing;
         #endregion
 
         #region Properties
+        public string Filter
+        {
+            get =>filter;
+            set
+            {
+                if (filter != value)
+                {
+                    filter = value;
+                    this.RefreshList();
+                  
+                }
+            }
+        }
         public List<Product> MyProducts { get; set; }
 
         public bool IsRefreshing
@@ -83,11 +97,18 @@
         #endregion
 
         #region Commands
+
+        public ICommand SearchCommand { get => new RelayCommand(RefreshList); }
+
+       
+
         public ICommand RefreshCommand { get => new RelayCommand(Refresh); }
 
         #endregion
 
         #region Mehtods
+
+        
 
         private void Refresh()
         {
@@ -142,25 +163,52 @@
             //    });
             // }
 
-            //Mejor opcion con landa y linq:
-            var myListProductItemViewModel = MyProducts.Select(p => new ProductItemViewModel
+            if (string.IsNullOrEmpty(Filter ))
             {
-                Description = p.Description,
-                ImagePath = p.ImagePath,
-                ImageArray = p.ImageArray,
-                IsAvailable = p.IsAvailable,
-                Price = p.Price,
-                ProductId = p.ProductId,
-                PublishOn = p.PublishOn,
-                Remarks = p.Remarks,
+                //Mejor opcion con landa y linq:
+                var myListProductItemViewModel = MyProducts.Select(p => new ProductItemViewModel
+                {
+                    Description = p.Description,
+                    ImagePath = p.ImagePath,
+                    ImageArray = p.ImageArray,
+                    IsAvailable = p.IsAvailable,
+                    Price = p.Price,
+                    ProductId = p.ProductId,
+                    PublishOn = p.PublishOn,
+                    Remarks = p.Remarks,
 
 
-            });
+                });
+
+
+                //aqui armos las observablecollection a aprtir de una genericcollection(list)
+                ListProducts = new ObservableCollection<ProductItemViewModel>(myListProductItemViewModel.OrderBy(p => p.Description));
+                IsRefreshing = false;
+            }
+            else
+            {
+                //Mejor opcion con landa y linq:
+                var myListProductItemViewModel = MyProducts.Select(p => new ProductItemViewModel
+                {
+                    Description = p.Description,
+                    ImagePath = p.ImagePath,
+                    ImageArray = p.ImageArray,
+                    IsAvailable = p.IsAvailable,
+                    Price = p.Price,
+                    ProductId = p.ProductId,
+                    PublishOn = p.PublishOn,
+                    Remarks = p.Remarks,
+
+
+                }).Where(p=>p.Description.ToLower().Trim().Contains(Filter.ToLower().Trim())).ToList();
 
 
             //aqui armos las observablecollection a aprtir de una genericcollection(list)
             ListProducts = new ObservableCollection<ProductItemViewModel>(myListProductItemViewModel.OrderBy(p => p.Description));
             IsRefreshing = false;
+            }
+
+           
         }
         #endregion
     }
