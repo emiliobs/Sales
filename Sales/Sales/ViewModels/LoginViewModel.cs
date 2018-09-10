@@ -2,6 +2,7 @@
 {
     using GalaSoft.MvvmLight.Command;
     using Sales.Helpers;
+    using Sales.Services;
     using System;
     using System.Collections.Generic;
     using System.Text;
@@ -10,9 +11,11 @@
 
     public class LoginViewModel:BaseViewModel
     {
-        #region Atributtes
+        #region Services
+        private ApiServices apiService;
+        #endregion
 
-
+        #region Atributtes       
         private bool isRunning;
         private bool isEnabled;
         #endregion
@@ -53,8 +56,13 @@
         #region Contructors
         public LoginViewModel()
         {
+            //Service
+            apiService = new ApiServices();
+
+            //Properties
             IsEnabled = true;
             IsRemembered = true;
+
         }
         #endregion
 
@@ -89,6 +97,41 @@
 
                 return;
             }
+
+            IsRunning = true;
+            IsEnabled = false;
+            //Aqui valido si hay conecction con  internet:
+            var connection = await apiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(Languages.Error,
+                                                               connection.Message,
+                                                               Languages.Accept);
+                return;
+            }
+
+            var url = Application.Current.Resources["UrlAPI"].ToString();
+            var token = await apiService.GetToken(url,Email,Password);
+
+            if (token == null || string.IsNullOrEmpty(token.AccessToken))
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(Languages.Error,
+                                                               Languages.SomethingWrong,
+                                                               Languages.Accept);
+                return;
+            }
+
+            IsRunning = false;
+            IsEnabled = true;
+
+            await Application.Current.MainPage.DisplayAlert(Languages.Error,
+                                                              "Todo bien....",
+                                                              Languages.Accept);
+
         }
         #endregion
     }

@@ -13,6 +13,7 @@ using SalesBackend.Helpers;
 
 namespace SalesBackend.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private LocalDataContext db = new LocalDataContext();

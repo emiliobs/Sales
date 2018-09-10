@@ -16,6 +16,7 @@ using SalesApi.Helpers;
 
 namespace SalesApi.Controllers
 {
+    [Authorize]
     public class ProductsController : ApiController
     {
         private DataContext db = new DataContext();
