@@ -132,7 +132,7 @@
             var url = Application.Current.Resources["UrlAPI"].ToString();
             var urlPrefix = Application.Current.Resources["UrlPrefix"].ToString();
             var controller = Application.Current.Resources["UrlProductsController"].ToString();
-            var response = await apiService.GetList<Product>(url, urlPrefix, controller);
+            var response = await apiService.GetList<Product>(url, urlPrefix, controller, Settings.TokenType, Settings.AccessToken);
             // var response = await apiService.GetList<Product>($"https://salesapiservices.azurewebsites.net", 
             //"/api", "/Products");
             if (!response.IsSuccess)

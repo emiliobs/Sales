@@ -3,6 +3,7 @@
     using GalaSoft.MvvmLight.Command;
     using Sales.Helpers;
     using Sales.Services;
+    using Sales.Views;
     using System;
     using System.Collections.Generic;
     using System.Text;
@@ -62,6 +63,7 @@
             //Properties
             IsEnabled = true;
             IsRemembered = true;
+
 
         }
         #endregion
@@ -125,12 +127,18 @@
                 return;
             }
 
+            //aqui guado en persistncia los token que viene del servicio:(aqui  lo guarada el plugin en disco)
+            Settings.TokenType = token.TokenType;
+            Settings.AccessToken = token.AccessToken;
+            Settings.IsRemembered = IsRemembered;
+
+
+            //Aqui instacion la page con la pagina sin navegacion de back productpage();
+            MainViewModel.GetInstance().Products = new ProductsViewModel();
+            Application.Current.MainPage = new ProductsPage();
+
             IsRunning = false;
             IsEnabled = true;
-
-            await Application.Current.MainPage.DisplayAlert(Languages.Error,
-                                                              "Todo bien....",
-                                                              Languages.Accept);
 
         }
         #endregion

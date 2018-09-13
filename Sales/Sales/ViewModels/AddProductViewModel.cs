@@ -201,7 +201,7 @@
             var urlPrefix = Application.Current.Resources["UrlPrefix"].ToString();
             var controller = Application.Current.Resources["UrlProductsController"].ToString();
 
-            var response = await ApiServices.Post(url, urlPrefix, controller, product);
+            var response = await ApiServices.Post(url, urlPrefix, controller, product, Settings.TokenType, Settings.AccessToken);
 
 
             if (!response.IsSuccess)
