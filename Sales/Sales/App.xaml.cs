@@ -10,6 +10,10 @@ namespace Sales
 {
 	public partial class App : Application
 	{
+        #region Properties
+        public static NavigationPage Navigator { get; internal set; } 
+        #endregion
+
         #region Contructs
         public App()
         {
@@ -18,7 +22,9 @@ namespace Sales
             if (Settings.IsRemembered && !string.IsNullOrEmpty(Settings.AccessToken))
             {
                 MainViewModel.GetInstance().Products = new ProductsViewModel();
-                MainPage = new NavigationPage(new ProductsPage());
+                //la mamster page tiene su propio navegador
+                MainPage = new MasterPage();
+                //MainPage = new NavigationPage(new ProductsPage());
             }
             else
             {

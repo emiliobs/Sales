@@ -59,7 +59,8 @@
         {
             //instancio la clase justo en el mmento que la necesite:
             AddProduct = new AddProductViewModel();
-            await Application.Current.MainPage.Navigation.PushAsync(new AddProductPage());
+            //await Application.Current.MainPage.Navigation.PushAsync(new AddProductPage());
+            await App.Navigator.PushAsync(new AddProductPage());
         }
 
         #endregion

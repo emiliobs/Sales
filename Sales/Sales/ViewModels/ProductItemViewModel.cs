@@ -32,7 +32,8 @@
         private async void EditProduct()
         {
             MainViewModel.GetInstance().EditProduct = new EditProductViewModel(this);
-            await Application.Current.MainPage.Navigation.PushAsync(new EditProductView());
+            //await Application.Current.MainPage.Navigation.PushAsync(new EditProductView());
+            await App.Navigator.PushAsync(new EditProductView());  
         }
 
         public ICommand DeleteProductCommand { get => new RelayCommand(DeleteProduct); }
@@ -67,7 +68,7 @@
             var url = Application.Current.Resources["UrlAPI"].ToString();
             var urlPrefix = Application.Current.Resources["UrlPrefix"].ToString();
             var controller = Application.Current.Resources["UrlProductsController"].ToString();
-            var response = await apiService.Delete(url, urlPrefix, controller, ProductId);
+            var response = await apiService.Delete(url, urlPrefix, controller, ProductId, Settings.TokenType, Settings.AccessToken);
             // var response = await apiService.GetList<Product>($"https://salesapiservices.azurewebsites.net", 
             //"/api", "/Products");
             if (!response.IsSuccess)

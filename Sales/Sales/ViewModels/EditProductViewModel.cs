@@ -146,7 +146,7 @@
             var url = Application.Current.Resources["UrlAPI"].ToString();
             var urlPrefix = Application.Current.Resources["UrlPrefix"].ToString();
             var controller = Application.Current.Resources["UrlProductsController"].ToString();
-            var response = await ApiServices.Delete(url, urlPrefix, controller, product.ProductId);
+            var response = await ApiServices.Delete(url, urlPrefix, controller, product.ProductId, Settings.TokenType, Settings.AccessToken);
             // var response = await apiService.GetList<Product>($"https://salesapiservices.azurewebsites.net", 
             //"/api", "/Products");
             if (!response.IsSuccess)
@@ -172,7 +172,8 @@
             IsRunning = false;
             IsEnabled = true;
             //aqui cuando ya elimine hago un back:
-            await Application.Current.MainPage.Navigation.PopAsync();
+            // await Application.Current.MainPage.Navigation.PopAsync();
+            await App.Navigator.PopAsync();
 
         }
         private async void ChangeImage()
@@ -228,11 +229,7 @@
                     Languages.Accept);
 
                 return;
-            }
-
-           
-
-          
+            }          
 
             if (Product.Price < 0)
             {
@@ -271,7 +268,7 @@
             var urlPrefix = Application.Current.Resources["UrlPrefix"].ToString();
             var controller = Application.Current.Resources["UrlProductsController"].ToString();
 
-            var response = await ApiServices.Put(url, urlPrefix, controller, product, Product.ProductId); 
+            var response = await ApiServices.Put(url, urlPrefix, controller, product, Product.ProductId, Settings.TokenType, Settings.AccessToken); 
 
 
             if (!response.IsSuccess)
@@ -312,7 +309,8 @@
             IsEnabled = true;
 
             //aqui desapilo y regreso a la página anterior:
-            await Application.Current.MainPage.Navigation.PopAsync();
+            //await Application.Current.MainPage.Navigation.PopAsync();
+            await App.Navigator.PopAsync();
         }
 
         #endregion

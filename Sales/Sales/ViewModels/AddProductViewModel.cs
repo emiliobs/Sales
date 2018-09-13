@@ -227,7 +227,8 @@
             IsEnabled = true;
 
             //aqui desapilo y regreso a la página anterior:
-            await Application.Current.MainPage.Navigation.PopAsync();
+            //await Application.Current.MainPage.Navigation.PopAsync();
+            await App.Navigator.PopAsync();
         }
 
         #endregion
