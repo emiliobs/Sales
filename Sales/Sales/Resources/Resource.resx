@@ -217,7 +217,7 @@
     <value>Setup</value>
   </data>
   <data name="Exit" xml:space="preserve">
-    <value>Close session</value>
+    <value>Close Session</value>
   </data>
   <data name="AddProducts" xml:space="preserve">
     <value>Add New Product</value>

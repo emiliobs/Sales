@@ -232,7 +232,7 @@ namespace Sales.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Close session.
+        ///   Looks up a localized string similar to Close Session.
         /// </summary>
         public static string Exit {
             get {

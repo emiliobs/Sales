@@ -64,6 +64,9 @@
             IsEnabled = true;
             IsRemembered = true;
 
+            Email = "barrera_emilio@hotmail.com";
+            Password = "Eabs123.";
+
 
         }
         #endregion
@@ -135,7 +138,8 @@
 
             //Aqui instacion la page con la pagina sin navegacion de back productpage();
             MainViewModel.GetInstance().Products = new ProductsViewModel();
-            Application.Current.MainPage = new ProductsPage();
+            //Application.Current.MainPage = new ProductsPage();
+            App.Current.MainPage = new MasterPage();
 
             IsRunning = false;
             IsEnabled = true;
