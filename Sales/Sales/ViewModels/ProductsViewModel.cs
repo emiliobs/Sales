@@ -175,7 +175,7 @@
             //aqui borros los datos en la bd local si existen antes de grabarlos:
             await dataService.DeleteAllProducts();  
             //aqui guando en bd los datos de los datos del lla lsita:
-            dataService.Insert(MyProducts);
+            await dataService.Insert(MyProducts);
         }
 
         private async Task<bool> LoadProductsFromAPI()

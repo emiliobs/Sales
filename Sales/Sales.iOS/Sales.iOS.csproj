@@ -212,4 +212,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\sales1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\nouser.png" />
+  </ItemGroup>
 </Project>

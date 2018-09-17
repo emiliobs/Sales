@@ -72,11 +72,23 @@
         #endregion
 
         #region Commands
+
+        public ICommand RegisterCommand { get => new RelayCommand(Register); }
+
+       
         public ICommand LoginCommand { get => new RelayCommand(Login); }
 
         #endregion
 
-        #region Methods 
+        #region Methods
+
+        private async void Register()
+        {
+            MainViewModel.GetInstance().Register = new RegisterPageViewModel();
+           await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
+        }
+
+
         private async void Login()
         {
             if (string.IsNullOrEmpty(Email))

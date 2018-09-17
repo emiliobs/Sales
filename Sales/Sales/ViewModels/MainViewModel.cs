@@ -18,6 +18,7 @@
         public AddProductViewModel AddProduct { get; set; }
         public EditProductViewModel EditProduct { get; set; }
         public LoginViewModel Login { get; set; }
+        public RegisterPageViewModel Register{ get; set; }
 
         public ObservableCollection<MenuItemViewModel> Menu { get; set; }
 
