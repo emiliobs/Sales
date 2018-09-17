@@ -106,6 +106,24 @@ namespace Sales.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your address....
+        /// </summary>
+        public static string AddressPlaceHolder {
+            get {
+                return ResourceManager.GetString("AddressPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -205,6 +223,15 @@ namespace Sales.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must enter a valid email..
+        /// </summary>
+        public static string EMailError {
+            get {
+                return ResourceManager.GetString("EMailError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter your email....
         /// </summary>
         public static string EmailPlaceHolder {
@@ -237,6 +264,33 @@ namespace Sales.Resources {
         public static string Exit {
             get {
                 return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First name.
+        /// </summary>
+        public static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a fist name..
+        /// </summary>
+        public static string FirstNameError {
+            get {
+                return ResourceManager.GetString("FirstNameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your first name....
+        /// </summary>
+        public static string FirstNamePlaceholder {
+            get {
+                return ResourceManager.GetString("FirstNamePlaceholder", resourceCulture);
             }
         }
         
@@ -282,6 +336,33 @@ namespace Sales.Resources {
         public static string IsAvailable {
             get {
                 return ResourceManager.GetString("IsAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last name.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a last name..
+        /// </summary>
+        public static string LastNameError {
+            get {
+                return ResourceManager.GetString("LastNameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your last name....
+        /// </summary>
+        public static string LastNamePlaceholder {
+            get {
+                return ResourceManager.GetString("LastNamePlaceholder", resourceCulture);
             }
         }
         
@@ -340,11 +421,56 @@ namespace Sales.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No products information available..
+        /// </summary>
+        public static string NoProductsMessage {
+            get {
+                return ResourceManager.GetString("NoProductsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        public static string PasswordConfirm {
+            get {
+                return ResourceManager.GetString("PasswordConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a password confirm..
+        /// </summary>
+        public static string PasswordConfirmError {
+            get {
+                return ResourceManager.GetString("PasswordConfirmError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your password confirm....
+        /// </summary>
+        public static string PasswordConfirmPlaceHolder {
+            get {
+                return ResourceManager.GetString("PasswordConfirmPlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a password. At least 6 characters..
+        /// </summary>
+        public static string PasswordError {
+            get {
+                return ResourceManager.GetString("PasswordError", resourceCulture);
             }
         }
         
@@ -358,11 +484,47 @@ namespace Sales.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The password and confirm must be equals..
+        /// </summary>
+        public static string PasswordsNoMatch {
+            get {
+                return ResourceManager.GetString("PasswordsNoMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must enter your password..
         /// </summary>
         public static string PasswordValidation {
             get {
                 return ResourceManager.GetString("PasswordValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone.
+        /// </summary>
+        public static string Phone {
+            get {
+                return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must enter a phone number..
+        /// </summary>
+        public static string PhoneError {
+            get {
+                return ResourceManager.GetString("PhoneError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your phone number....
+        /// </summary>
+        public static string PhonePlaceHolder {
+            get {
+                return ResourceManager.GetString("PhonePlaceHolder", resourceCulture);
             }
         }
         
@@ -408,6 +570,15 @@ namespace Sales.Resources {
         public static string Register {
             get {
                 return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user was created successfully. Now you can enter with the email and the assigned password..
+        /// </summary>
+        public static string RegisterConfirmation {
+            get {
+                return ResourceManager.GetString("RegisterConfirmation", resourceCulture);
             }
         }
         

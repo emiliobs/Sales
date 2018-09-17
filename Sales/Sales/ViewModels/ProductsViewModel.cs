@@ -8,6 +8,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Input;
     using Xamarin.Forms;
 
@@ -15,6 +16,7 @@
     {
         #region Services
         ApiServices apiService;
+        DataService dataService;
         #endregion
 
         #region Atributtes  
@@ -74,6 +76,7 @@
 
             //service
             apiService = new ApiServices();
+            dataService = new DataService();
 
             //Methods
             LoadProducts();
@@ -120,15 +123,63 @@
 
             //Aqui valido si hay conecction con  internet:
             var connection = await apiService.CheckConnection();
-            if (!connection.IsSuccess)
+
+            //if (!connection.IsSuccess)
+            //{
+            //    IsRefreshing = false;
+            //    await Application.Current.MainPage.DisplayAlert(Languages.Error,
+            //                                                   connection.Message,
+            //                                                   Languages.Accept);
+            //    return;
+            //}
+
+            if (connection.IsSuccess)
+            {
+                var answers = await LoadProductsFromAPI();
+
+                if (answers)
+                {
+                    SaveProductsToDB();
+                }
+            }
+            else
+            {
+                await LoadProductsFromDB();
+            }
+
+            //si esto sucese espor que no hay productos o no conexion:
+            if (MyProducts == null || MyProducts.Count == 0)
             {
                 IsRefreshing = false;
                 await Application.Current.MainPage.DisplayAlert(Languages.Error,
-                                                               connection.Message,
-                                                               Languages.Accept);
+                                                                  connection.Message,
+                                                                  Languages.Accept);
+
                 return;
             }
 
+            //Aqui un método para refrezcar la lista:
+            this.RefreshList();
+
+        }
+
+        private async Task LoadProductsFromDB()
+        {
+            //Aqui traigo todos los productos de la bd:
+            MyProducts = await dataService.GetAllProducts();
+               
+        }
+
+        private async Task SaveProductsToDB()
+        {
+            //aqui borros los datos en la bd local si existen antes de grabarlos:
+            await dataService.DeleteAllProducts();  
+            //aqui guando en bd los datos de los datos del lla lsita:
+            dataService.Insert(MyProducts);
+        }
+
+        private async Task<bool> LoadProductsFromAPI()
+        {
             var url = Application.Current.Resources["UrlAPI"].ToString();
             var urlPrefix = Application.Current.Resources["UrlPrefix"].ToString();
             var controller = Application.Current.Resources["UrlProductsController"].ToString();
@@ -137,16 +188,15 @@
             //"/api", "/Products");
             if (!response.IsSuccess)
             {
-                await Application.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
-                IsRefreshing = false;
-                return;
+                //await Application.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
+                //IsRefreshing = false;
+
+                return false;
             }
 
             MyProducts = (List<Product>)response.Result;
 
-            //Aqui un método para refrezcar la lista:
-            this.RefreshList();     
-
+            return true;
         }
 
         public void RefreshList()
