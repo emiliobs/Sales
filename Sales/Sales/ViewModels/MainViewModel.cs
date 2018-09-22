@@ -1,6 +1,7 @@
 ﻿namespace Sales.ViewModels
 {
     using GalaSoft.MvvmLight.Command;
+    using Sales.Common.Models;
     using Sales.Helpers;
     using Sales.Views;
     using System;
@@ -14,6 +15,8 @@
     {
         #region Properties
 
+        //Aqui creo esta propiedad para porder acceder al usuro desde toda la palicación:
+        public MyUserASP UserASP { get; set; }
         public ProductsViewModel Products { get; set; }
         public AddProductViewModel AddProduct { get; set; }
         public EditProductViewModel EditProduct { get; set; }
@@ -21,6 +24,21 @@
         public RegisterPageViewModel Register{ get; set; }
 
         public ObservableCollection<MenuItemViewModel> Menu { get; set; }
+
+        //aqui cargo los datos que estan grabados en el claims
+        public string UserFullName
+        {
+            get
+            {
+                if (UserASP != null && UserASP.Claims != null && UserASP.Claims.Count > 1)
+                {
+                    return $"{UserASP.Claims[0].ClaimValue} {UserASP.Claims[1].ClaimValue}";
+                }
+
+                return null;
+            }
+
+        }
 
         #endregion
 

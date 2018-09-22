@@ -12,7 +12,18 @@
             <Image
             	Source="sales1">
             </Image>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label FontAttributes="Bold" FontSize="Large" HorizontalOptions="Center" TextColor="Wheat">Hello,</Label>
+                <Label FontAttributes="Bold"
+                   FontSize="Large"
+                   HorizontalOptions="Center"
+                   Text=" {Binding UserFullName}"
+                   TextColor="Wheat">
+                </Label>
+            </StackLayout>
+            
             <ListView
+                SeparatorVisibility="None"
             	ItemsSource="{Binding Menu}"
             	HasUnevenRows="True">
                 <ListView.ItemTemplate>

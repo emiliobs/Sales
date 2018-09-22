@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+using Sales.Common.Models;
 using Sales.Helpers;
 using Sales.ViewModels;
 using Sales.Views;
@@ -19,21 +21,42 @@ namespace Sales
         {
             InitializeComponent();
 
-            if (Settings.IsRemembered && !string.IsNullOrEmpty(Settings.AccessToken))
+            var mainViewModel = MainViewModel.GetInstance();
+
+            if (Settings.IsRemembered)
             {
-                MainViewModel.GetInstance().Products = new ProductsViewModel();
-                //la mamster page tiene su propio navegador
-                MainPage = new MasterPage();
-                //MainPage = new NavigationPage(new ProductsPage());
+
+                if (!string.IsNullOrEmpty(Settings.UserASP))
+                {
+                    mainViewModel.UserASP = JsonConvert.DeserializeObject<MyUserASP>(Settings.UserASP);
+                }
+
+                mainViewModel.Products = new ProductsViewModel();
+                this.MainPage = new MasterPage();
             }
             else
             {
-                // MainPage = new NavigationPage (new ProductsPage());
-                MainViewModel.GetInstance().Login = new LoginViewModel();
-                MainPage = new NavigationPage(new LoginView());
+                mainViewModel.Login = new LoginViewModel();
+                
+                this.MainPage = new NavigationPage(new LoginView());
             }
 
-        
+
+            //if (Settings.IsRemembered && !string.IsNullOrEmpty(Settings.AccessToken))
+            //{
+            //    MainViewModel.GetInstance().Products = new ProductsViewModel();
+            //    //la mamster page tiene su propio navegador
+            //    MainPage = new MasterPage();
+            //    //MainPage = new NavigationPage(new ProductsPage());
+            //}
+            //else
+            //{
+            //    // MainPage = new NavigationPage (new ProductsPage());
+            //    MainViewModel.GetInstance().Login = new LoginViewModel();
+            //    MainPage = new NavigationPage(new LoginView());
+            //}
+
+
         }
 
         #endregion

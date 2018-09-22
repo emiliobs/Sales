@@ -1,6 +1,8 @@
 ﻿namespace Sales.ViewModels
 {
     using GalaSoft.MvvmLight.Command;
+    using Newtonsoft.Json;
+    using Sales.Common.Models;
     using Sales.Helpers;
     using Sales.Services;
     using Sales.Views;
@@ -139,6 +141,8 @@
                 await Application.Current.MainPage.DisplayAlert(Languages.Error,
                                                                Languages.SomethingWrong,
                                                                Languages.Accept);
+
+            
                 return;
             }
 
@@ -147,6 +151,18 @@
             Settings.AccessToken = token.AccessToken;
             Settings.IsRemembered = IsRemembered;
 
+            //aqui guarso el usuraio en persistencia: consumido desde la api
+            var UrlPrefix = Application.Current.Resources["UrlPrefix"].ToString();
+            var UrlUsersController = Application.Current.Resources["UrlUsersController"].ToString();
+            var UrlUsersControllerGetUser = Application.Current.Resources["UrlUsersControllerGetUser"].ToString();
+            var response = await apiService.GetUser(url,UrlPrefix, $"{UrlUsersController}{UrlUsersControllerGetUser}", 
+                                                    Email, token.TokenType,token.AccessToken);
+            if (response.IsSuccess)
+            {
+                var userAsp = (MyUserASP)response.Result; ;
+                MainViewModel.GetInstance().UserASP = userAsp;
+                Settings.UserASP = JsonConvert.SerializeObject(userAsp);
+            }
 
             //Aqui instacion la page con la pagina sin navegacion de back productpage();
             MainViewModel.GetInstance().Products = new ProductsViewModel();

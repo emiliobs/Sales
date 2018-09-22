@@ -46,7 +46,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         [Route("GetUser")]
         public IHttpActionResult GetUser(JObject form)
         {

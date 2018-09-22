@@ -212,12 +212,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <AndroidResource Include="Content\Img\noproduct.png">
+    <AndroidResource Include="Content\Products\noproduct.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
-    <Content Include="Content\Img\Sales.jpg" />
-    <Content Include="Content\Img\sales2.jpg" />
+    <Content Include="Content\Products\Sales.jpg" />
+    <Content Include="Content\Products\sales2.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

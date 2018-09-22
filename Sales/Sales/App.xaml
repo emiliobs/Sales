@@ -19,12 +19,13 @@
 
             <!-- Url Api -->
            <!--<x:String x:Key="UrlAPI">https://salesapiservices.azurewebsites.net</x:String>-->
-            <x:String x:Key="UrlAPI">http://192.168.0.11:54268</x:String>
+           <x:String x:Key="UrlAPI">http://192.168.0.11:54268</x:String>
             <x:String x:Key="UrlPrefix">/api</x:String>
             <x:String x:Key="UrlProductsController">/Products</x:String>
             <x:String x:Key="UrlUsersController">/Users</x:String>
+            <x:String x:Key="UrlUsersControllerGetUser">/GetUser</x:String>
 
-           
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

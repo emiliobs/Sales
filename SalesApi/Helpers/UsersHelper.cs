@@ -2,6 +2,7 @@
 {
     using System;
     using System.Security.Claims;
+    using System.Security;
     using System.Threading.Tasks;
     using System.Web.Configuration;
     using Microsoft.AspNet.Identity;
@@ -68,18 +69,18 @@
                 {
                     var newUserASP = userManager.FindByEmail(userRequest.EMail);
                     //aqui le grabo datos adiciolas:
-                    userManager.AddClaim(newUserASP.Id, new Claim(ClaimTypes.GivenName, userRequest.FirstName));
-                    userManager.AddClaim(newUserASP.Id, new Claim(ClaimTypes.Name, userRequest.LastName));
+                    userManager.AddClaim(newUserASP.Id, new System.Security.Claims.Claim(ClaimTypes.GivenName, userRequest.FirstName));
+                    userManager.AddClaim(newUserASP.Id, new System.Security.Claims.Claim(ClaimTypes.Name, userRequest.LastName));
 
                     //aqui guardo los datos de la las propiedades como claims:
                     if (!string.IsNullOrEmpty(userRequest.Address))
                     {
-                        userManager.AddClaim(newUserASP.Id, new Claim(ClaimTypes.StreetAddress, userRequest.Address));
+                        userManager.AddClaim(newUserASP.Id, new System.Security.Claims.Claim(ClaimTypes.StreetAddress, userRequest.Address));
                     }
 
                     if (!string.IsNullOrEmpty(userRequest.ImagePath))
                     {
-                        userManager.AddClaim(newUserASP.Id, new Claim(ClaimTypes.Uri, userRequest.ImagePath));
+                        userManager.AddClaim(newUserASP.Id, new System.Security.Claims.Claim(ClaimTypes.Uri, userRequest.ImagePath));
                     }
 
                     return new Response

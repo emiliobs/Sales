@@ -52,7 +52,7 @@ namespace SalesBackend.Controllers
             if (ModelState.IsValid)
             {
                 var picture = string.Empty;
-                var folder = "~/Content/Img";
+                var folder = "~/Content/Products";
                 if (view.ImageFile != null)
                 {
                     picture = FilesHelpers.UploadPhoto(view.ImageFile, folder);
@@ -88,6 +88,7 @@ namespace SalesBackend.Controllers
               ProductId = view.ProductId,
               PublishOn = view.PublishOn,
               Remarks = view.Remarks,
+              
               
             }; 
         }
