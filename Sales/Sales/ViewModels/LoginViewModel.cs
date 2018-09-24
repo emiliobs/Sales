@@ -74,6 +74,35 @@
         #endregion
 
         #region Commands
+        public ICommand LoginTwitterComand
+        {
+            get
+            {
+                return new RelayCommand(LoginTwitter);
+            }
+        }
+
+       
+
+
+        public ICommand LoginInstagramComand
+        {
+            get
+            {
+                return new RelayCommand(LoginInstagram);
+            }
+        }                  
+
+
+        public ICommand LoginFacebookComand
+        {
+            get
+            {
+                return new RelayCommand(LoginFacebook);
+            }
+        }
+
+        
 
         public ICommand RegisterCommand { get => new RelayCommand(Register); }
 
@@ -83,6 +112,63 @@
         #endregion
 
         #region Methods
+
+        private async void LoginTwitter()
+        {
+            var connection = await this.apiService.CheckConnection();
+
+            if (!connection.IsSuccess)
+            {
+                this.IsRunning = false;
+                this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    connection.Message,
+                    Languages.Accept);
+                return;
+            }
+
+            await Application.Current.MainPage.Navigation.PushAsync(
+                new LoginTwitterPage());
+        }
+        private async void LoginInstagram()
+        {
+            var connection = await this.apiService.CheckConnection();
+
+            if (!connection.IsSuccess)
+            {
+                this.IsRunning = false;
+                this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    connection.Message,
+                    Languages.Accept);
+                return;
+            }
+
+            await Application.Current.MainPage.Navigation.PushAsync(
+                new LoginInstagramPage());
+        }
+
+        private async void LoginFacebook()
+        {
+            var connection = await this.apiService.CheckConnection();
+
+            if (!connection.IsSuccess)
+            {
+                this.IsRunning = false;
+                this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    Languages.Error,
+                    connection.Message,
+                    Languages.Accept);
+                return;
+            }
+
+            await Application.Current.MainPage.Navigation.PushAsync(
+                new LoginFacebookPage());
+
+        }
 
         private async void Register()
         {
