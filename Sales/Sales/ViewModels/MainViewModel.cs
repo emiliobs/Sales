@@ -30,9 +30,23 @@
         {
             get
             {
-                if (UserASP != null && UserASP.Claims != null && UserASP.Claims.Count > 1)
+                if (UserASP != null && UserASP.Claims != null && UserASP.Claims.Count > 0)
                 {
                     return $"{UserASP.Claims[0].ClaimValue} {UserASP.Claims[1].ClaimValue}";
+                }
+
+                return null;
+            }
+
+        }
+        public string  UserImageFullPath
+        {
+            get
+            {
+                if (UserASP != null && UserASP.Claims != null && UserASP.Claims.Count > 3)
+                {
+                    return $"https://salesapiservices.azurewebsites.net{UserASP.Claims[3].ClaimValue.Substring(1)}";
+                   // return $"http://192.168.0.11:54268{UserASP.Claims[3].ClaimValue.Substring(1)}";
                 }
 
                 return null;

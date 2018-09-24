@@ -3,15 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Sales.Views.MenuPage"
              xmlns:i18n="clr-namespace:Sales.Helpers"
+             xmlns:ImageCircle="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="{i18n:Translate Menu}"
              BackgroundColor="Gray">
     <ContentPage.Content>
         <StackLayout
         	Padding="5">
-            <Image
-            	Source="sales1">
-            </Image>
+            <ImageCircle:CircleImage Source="{Binding UserImageFullPath}"
+                                     Aspect="AspectFill"
+                                     WidthRequest="200"
+                                     HeightRequest="200">                
+            </ImageCircle:CircleImage>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                 <Label FontAttributes="Bold" FontSize="Large" HorizontalOptions="Center" TextColor="Wheat">Hello,</Label>
                 <Label FontAttributes="Bold"

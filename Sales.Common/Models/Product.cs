@@ -41,8 +41,8 @@
                     return $"noproduct";
                 }
 
-                //return $"https://salesapiservices.azurewebsites.net/{ImagePath.Substring(1)}";
-                return $"https://salesbackend.azurewebsites.net/{ImagePath.Substring(1)}";
+                return $"https://salesapiservices.azurewebsites.net/{ImagePath.Substring(1)}";
+               // return $"https://salesbackend.azurewebsites.net/{ImagePath.Substring(1)}";
             }
 
         }
