@@ -39,20 +39,45 @@
             }
 
         }
-        public string  UserImageFullPath
+        //public string  UserImageFullPath
+        //{
+        //    get
+        //    {
+        //        if (UserASP != null && UserASP.Claims != null && UserASP.Claims.Count > 3)
+        //        {
+        //            return $"https://salesapiservices.azurewebsites.net{UserASP.Claims[3].ClaimValue.Substring(1)}";
+        //           // return $"http://192.168.0.11:54268{UserASP.Claims[3].ClaimValue.Substring(1)}";
+        //        }
+
+        //        return null;
+        //    }
+
+        //}
+
+            //esta porpiedad me toma la foto coon la de facebook o la de mi api:
+        public string UserImageFullPath
         {
             get
             {
-                if (UserASP != null && UserASP.Claims != null && UserASP.Claims.Count > 3)
+                foreach (var claim in this.UserASP.Claims)
                 {
-                    return $"https://salesapiservices.azurewebsites.net{UserASP.Claims[3].ClaimValue.Substring(1)}";
-                   // return $"http://192.168.0.11:54268{UserASP.Claims[3].ClaimValue.Substring(1)}";
+                    if (claim.ClaimType == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/uri")
+                    {
+                        //aqui pregunto si la foto es mia o de facebook, siempieza con ~ es una foto mia de mi api,
+                        //si no es de facebook
+                        if (claim.ClaimValue.StartsWith("~"))
+                        {
+                            return $"https://salesapiservices.azurewebsites.net{claim.ClaimValue.Substring(1)}";
+                        }
+
+                        return claim.ClaimValue;
+                    }
                 }
 
                 return null;
             }
-
         }
+
 
         #endregion
 
